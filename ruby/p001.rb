@@ -1,0 +1,27 @@
+# Problem #1
+# 	If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+# 	Find the sum of all the multiples of 3 or 5 below 1000.
+#
+# Solution:
+#   The brute force approach to sum all the numbers such that x % 3 == 0 && x % 5 == 0
+#
+#	However, the better approach is to find the sum of numbers from [1, 2, 3, ..., n] and multiply it with the 3 and then 5
+#	and find the sum of the two.
+#
+#	Even better approach is to use the formula: n * (n + 1) / 2 to find the sum of numbers between [1, ..., n] but the catch is
+#       numbers like 15, 30 and etc are double counted. Hence, we need to exclude them.
+#
+
+find_floor = lambda { |x| (999 / x).floor  }
+sum_func   = lambda { |x| x * (x + 1) / 2   }
+
+floor_for_3 = find_floor.(3)
+floor_for_5 = find_floor.(5)
+floor_for_15 = find_floor.(15)
+
+divisible_by_3_sum = 3 * sum_func.(floor_for_3)
+divisible_by_5_sum = 5 * sum_func.(floor_for_5)
+divisible_by_15_sum = 15 * sum_func.(floor_for_15)
+
+result = divisible_by_3_sum + divisible_by_5_sum - divisible_by_15_sum
+puts result
