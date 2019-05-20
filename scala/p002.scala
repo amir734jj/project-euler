@@ -8,3 +8,28 @@
 // Solution:
 //     The Fibonacci sequence is equal to F0 = 1, F1 = 2 and Fn = Fn-1 + Fn-2. The basic optimization we can do is to
 //     use memoization to address repeat calculation; however it does not solve the even values number issue in an optimal manner.
+
+```scala
+object HelloWorld {
+  def main(args: Array[String]) {
+    var cache = Map[Int, Int]()
+
+    def fib(n: Int): Int = cache.getOrElse(n, {
+        val result = n match {
+          case 1 => 1
+          case 2 => 2
+          case _ => fib(n - 1) + fib(n - 2)
+        }
+
+        cache += n -> result
+        result
+      })
+
+    for (i <- 1 to 100) {
+      fib(i)
+    }
+
+    println(cache)
+  }
+}
+```
